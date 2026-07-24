@@ -1,0 +1,18 @@
+{
+  "name": "zig-xml",
+  "version": "0.1.0",
+  "description": "A small, lenient, allocation-light XML/HTML tokenizer for Zig with HTML5 entity decoding.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zig-utils/zig-xml.git"
+  },
+  "scripts": {
+    "release": "pantry release patch --yes",
+    "release:minor": "pantry release minor --yes",
+    "release:major": "pantry release major --yes"
+  },
+  "dependencies": {
+    "ziglang.org": "^0.17.0"
+  }
+}
