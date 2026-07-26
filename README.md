@@ -79,6 +79,16 @@ next call to `next()` — copy anything you need to retain.
 - `decode(allocator, raw) ![]u8` / `decodeInto(&list, allocator, raw) !void`
 - `entity.lookup(name) ?[2]u21` — the underlying HTML5 named-entity table
 
+## Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable:
+
+[Discussions on GitHub](https://github.com/zig-utils/zig-xml/discussions)
+
+For casual chit-chat with others using this package:
+
+[Join the Stacks Discord Server](https://stacksjs.com/discord)
+
 ## License
 
 MIT. The bundled HTML5 named-entity table is vendored from Bun (MIT) — see
