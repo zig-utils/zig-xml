@@ -69,10 +69,33 @@ pub fn main() !void {
 Attribute slices (and the `Element.attributes` list) are valid only until the
 next call to `next()` — copy anything you need to retain.
 
+### Streaming input
+
+`Reader.initStream` tokenizes from any `std.Io.Reader` (a file, a socket, a part
+inflating out of a zip archive) while holding at most `buffer_size` bytes of the
+document (64 KiB by default), so memory stays flat however large the input is:
+
+```zig
+var file_reader = file.reader(io, &read_buffer);
+var reader = try xml.Reader.initStream(allocator, &file_reader.interface, .{});
+defer reader.deinit();
+while (try reader.next()) |event| {
+    // In streaming mode every slice in `event` is valid only until the next `next()`.
+}
+```
+
+Tokens that fit in the buffer come out exactly as the slice API produces them,
+however the source splits its reads. Longer tokens are handled without growing:
+text, comments, CDATA, declarations and processing instructions arrive as several
+consecutive events of the same kind (a processing instruction then ends only at
+`?>`), and a start or end tag longer than the buffer is `error.TokenTooLong`.
+`reader.offset()` gives the document position of the next unread byte.
+
 ## API
 
 - `Reader.init(allocator, input) Reader` / `reader.deinit()`
-- `reader.next() !?Event`
+- `Reader.initStream(allocator, source: *std.Io.Reader, .{ .buffer_size }) !Reader`
+- `reader.next() !?Event`, `reader.offset() u64`
 - `Event` — `open` / `self_closing` (`Element`), `close` (name), `text`,
   `cdata`, `comment`, `processing_instruction`, `declaration`
 - `Element{ name, attributes }`, with `element.attribute(name) ?[]const u8`
