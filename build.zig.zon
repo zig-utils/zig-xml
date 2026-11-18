@@ -1,6 +1,6 @@
 .{
     .name = .zig_xml,
-    .version = "0.1.0",
+    .version = "0.2.0",
     .minimum_zig_version = "0.17.0-dev.1857+3c46da14d",
     .fingerprint = 0x8c46bb51c5b7fc2e, // Changing this has security and trust implications.
     .paths = .{

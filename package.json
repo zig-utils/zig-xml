@@ -1,6 +1,6 @@
 {
   "name": "zig-xml",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A small, lenient, allocation-light XML/HTML tokenizer for Zig with HTML5 entity decoding.",
   "license": "MIT",
   "repository": {
